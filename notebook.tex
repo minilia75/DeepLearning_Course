@@ -1,0 +1,1009 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Lab1\_DL-Students\_v3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Deep Learning Lab Session
+
+First Lab Session - 3 Hours
+
+Artificial Neural Networks for Handwritten Digits Recognition
+
+     Student 1: Gourrat Agathe \# name of student 1\\ Student 2: Salhi Laila
+\# name of student 2\\ Group name: deeplearn0 \# name of your group
+(i.e. deeplearnXX)
+
+The aim of this session is to practice with Artificial Neural Networks.
+Answers and experiments should be made by groups of two students. Each
+group should fill and run appropriate notebook cells.
+
+To generate your final report and upload it on the submission website
+http://bigfoot-m1.eurecom.fr/teachingsub/login (using your
+deeplearnXX/password). Do not forget to run all your cells before
+generating your final report and do not forget to include the names of
+all participants in the group. The lab session should be completed ans
+submitted by April 13th 2018 (23:59:59 CET).
+
+    \section{Introduction}\label{introduction}
+
+    During this lab session, you will implement, train and test a Neural
+Network for the Handwritten Digits Recognition problem {[}1{]} with
+different settings of hyperparameters. You will use the MNIST dataset
+which was constructed from scanned documents available from the National
+Institute of Standards and Technology (NIST). Images of digits were
+taken from a variety of scanned documents, normalized in size and
+centered.
+
+{Figure 1: MNIST digits examples}
+
+This assignment includes a written part of programms to help you
+understand how to build and train your neural net and then to test your
+code and get results.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+   NeuralNetwork.py 
+\item
+   transfer\_functions.py 
+\item
+   utils.py 
+\end{enumerate}
+
+Functions defined inside the python files mentionned above can be
+imported using the python command "from filename import function".
+
+You will use the following libraries:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+   numpy : for creating arrays and using methods to manipulate arrays;
+\item
+   matplotlib : for making plots.
+\end{enumerate}
+
+Before starting the lab, please launch the cell below. After that, you
+may not need to do any imports during the lab.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} All imports}
+        \PY{k+kn}{from} \PY{n+nn}{NeuralNetwork} \PY{k}{import} \PY{n}{NeuralNetwork}
+        \PY{k+kn}{from} \PY{n+nn}{transfer\PYZus{}functions} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{utils} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+\end{Verbatim}
+
+
+    \section{Section 1 : Your First Neural
+Network}\label{section-1-your-first-neural-network}
+
+Part 1: Before designing and writing your code, you will first work on a
+neural network by hand. Consider the following neural network with two
+inputs $x=(x_1,x_2)$, one hidden layer and a single output unit $y$. The
+initial weights are set to random values. Neurons 6 and 7 represent
+biases. Bias values are equal to 1. You will consider a training sample
+whose feature vector is $x = (0.8, 0.2)$ and whose label is $y = 0.4$.
+
+Assume that neurons have a sigmoid activation function
+$f(x)=\frac{1}{(1+e^{-x})}$. The loss function $L$ is a Mean Squared
+Error (MSE): if $o$ denotes the output of the neural network, then the
+loss for a given sample $(o, y)$ is
+$L(o, y) = \left|\left| o - y \right|\right|^2$. In the following, you
+will assume that if you want to backpropagate the error on a whole
+batch, you will backpropagate the average error on that batch. More
+formally, let $((x^{(1)}, y^{(1)}), ..., (x^{(N)}, y^{(N)}))$ be a batch
+and $o^{(k)}$ the output associated to $x^{(k)}$. Then the total error
+$\bar{L}$ will be as follows:
+
+$\bar{L} = \frac{1}{N} \sum_{k=1}^{N} L(o^{(k)}, y^{(k)})$.
+
+{Figure 2: Neural network }
+
+Question 1.1.1: Compute the new values of weights $w_{i,j}$ after a
+forward pass and a backward pass, and the outputs of the neural network
+before and after the backward path, when the learning rate is
+$\lambda$=5. $w_{i,j}$ is the weight of the connexion between neuron $i$
+and neuron $j$. Please detail your computations in the cell below and
+print your answers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Initialisation of the variables}
+        \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{5.0} \PY{c+c1}{\PYZsh{} Learning rate}
+        \PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{x6}\PY{p}{,} \PY{n}{x7} \PY{o}{=} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0} 
+        \PY{n}{w13}\PY{p}{,} \PY{n}{w14}\PY{p}{,} \PY{n}{w23}\PY{p}{,} \PY{n}{w24}\PY{p}{,} \PY{n}{w63}\PY{p}{,} \PY{n}{w64} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.4} \PY{c+c1}{\PYZsh{} Weights of the neurons from the input layer and the hidden layer}
+        \PY{n}{w35}\PY{p}{,} \PY{n}{w45}\PY{p}{,} \PY{n}{w75} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.6}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{0.5} \PY{c+c1}{\PYZsh{} Weights of the neurons from the hidden layer and the output layer}
+        \PY{n}{y} \PY{o}{=} \PY{l+m+mf}{0.4}
+        
+        \PY{c+c1}{\PYZsh{} Computation of the activation functions in the hidden layer}
+        \PY{n}{u3} \PY{o}{=} \PY{n}{x1}\PY{o}{*}\PY{n}{w13}\PY{o}{+}\PY{n}{x2}\PY{o}{*}\PY{n}{w23}\PY{o}{+}\PY{n}{x6}\PY{o}{*}\PY{n}{w63}
+        \PY{n}{u4} \PY{o}{=} \PY{n}{x1}\PY{o}{*}\PY{n}{w14}\PY{o}{+}\PY{n}{x2}\PY{o}{*}\PY{n}{w24}\PY{o}{+}\PY{n}{x6}\PY{o}{*}\PY{n}{w64}
+        
+        
+        \PY{n}{x3} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{u3}\PY{p}{)}
+        \PY{n}{x4} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{u4}\PY{p}{)}
+        
+        \PY{n}{u5} \PY{o}{=} \PY{n}{x3}\PY{o}{*}\PY{n}{w35}\PY{o}{+}\PY{n}{x4}\PY{o}{*}\PY{n}{w45}\PY{o}{+}\PY{n}{x7}\PY{o}{*}\PY{n}{w75}
+        \PY{n}{x5} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{u5}\PY{p}{)}
+        
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=== FORWARD PASS 1 ===}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Output =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x5}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{derivHiddenWeight}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{u\PYZus{}i}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{previousOut}\PY{p}{,} \PY{n}{actualOut}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{derivOutputWeight}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{u\PYZus{}i}\PY{p}{,} \PY{n}{actualOut}\PY{p}{)} \PY{o}{*} \PY{n}{w} \PY{o}{*} \PY{n}{dsigmoid}\PY{p}{(}\PY{n}{actualOut}\PY{p}{)} \PY{o}{*} \PY{n}{previousOut} \PY{o}{/} \PY{n}{actualOut}
+        
+        \PY{k}{def} \PY{n+nf}{derivOutputWeight}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{u\PYZus{}i}\PY{p}{,} \PY{n}{o\PYZus{}j}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{t}\PY{p}{)} \PY{o}{*} \PY{n}{dsigmoid}\PY{p}{(}\PY{n}{u\PYZus{}i}\PY{p}{)} \PY{o}{*} \PY{n}{o\PYZus{}j}
+        
+        \PY{n}{d\PYZus{}w35} \PY{o}{=} \PY{n}{derivOutputWeight}\PY{p}{(}\PY{n}{x5}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{u5}\PY{p}{,} \PY{n}{x3}\PY{p}{)}
+        \PY{n}{d\PYZus{}w45} \PY{o}{=} \PY{n}{derivOutputWeight}\PY{p}{(}\PY{n}{x5}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{u5}\PY{p}{,} \PY{n}{x4}\PY{p}{)}
+        \PY{n}{d\PYZus{}w75} \PY{o}{=} \PY{n}{derivOutputWeight}\PY{p}{(}\PY{n}{x5}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{u5}\PY{p}{,} \PY{n}{x7}\PY{p}{)}
+        
+        \PY{n}{d\PYZus{}w13} \PY{o}{=} \PY{n}{derivHiddenWeight}\PY{p}{(}\PY{n}{x5}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{u5}\PY{p}{,} \PY{n}{w35}\PY{p}{,} \PY{n}{x1}\PY{p}{,} \PY{n}{x3}\PY{p}{)}
+        \PY{n}{d\PYZus{}w14} \PY{o}{=} \PY{n}{derivHiddenWeight}\PY{p}{(}\PY{n}{x5}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{u5}\PY{p}{,} \PY{n}{w45}\PY{p}{,} \PY{n}{x1}\PY{p}{,} \PY{n}{x4}\PY{p}{)}
+        \PY{n}{d\PYZus{}w23} \PY{o}{=} \PY{n}{derivHiddenWeight}\PY{p}{(}\PY{n}{x5}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{u5}\PY{p}{,} \PY{n}{w35}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{x3}\PY{p}{)}
+        \PY{n}{d\PYZus{}w24} \PY{o}{=} \PY{n}{derivHiddenWeight}\PY{p}{(}\PY{n}{x5}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{u5}\PY{p}{,} \PY{n}{w45}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{x4}\PY{p}{)}
+        \PY{n}{d\PYZus{}w63} \PY{o}{=} \PY{n}{derivHiddenWeight}\PY{p}{(}\PY{n}{x5}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{u5}\PY{p}{,} \PY{n}{w35}\PY{p}{,} \PY{n}{x6}\PY{p}{,} \PY{n}{x3}\PY{p}{)}
+        \PY{n}{d\PYZus{}w64} \PY{o}{=} \PY{n}{derivHiddenWeight}\PY{p}{(}\PY{n}{x5}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{u5}\PY{p}{,} \PY{n}{w45}\PY{p}{,} \PY{n}{x6}\PY{p}{,} \PY{n}{x4}\PY{p}{)}
+        
+        \PY{n}{w13} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{lr}\PY{o}{*}\PY{n}{d\PYZus{}w13}
+        \PY{n}{w14} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{lr}\PY{o}{*}\PY{n}{d\PYZus{}w14}
+        \PY{n}{w23} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{lr}\PY{o}{*}\PY{n}{d\PYZus{}w23}
+        \PY{n}{w24} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{lr}\PY{o}{*}\PY{n}{d\PYZus{}w24}
+        \PY{n}{w63} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{lr}\PY{o}{*}\PY{n}{d\PYZus{}w63}
+        \PY{n}{w64} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{lr}\PY{o}{*}\PY{n}{d\PYZus{}w64}
+        \PY{n}{w35} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{lr}\PY{o}{*}\PY{n}{d\PYZus{}w35}
+        \PY{n}{w45} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{lr}\PY{o}{*}\PY{n}{d\PYZus{}w45}
+        \PY{n}{w75} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{lr}\PY{o}{*}\PY{n}{d\PYZus{}w75}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=== BACKWARD PASS ===}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w13 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{w13}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w14 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{w14}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w23 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{w23}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w24 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{w24}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w63 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{w63}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w64 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{w64}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w35 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{w35}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w45 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{w45}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w75 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{w75}\PY{p}{)}
+        
+        
+        \PY{n}{x3} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{x1}\PY{o}{*}\PY{n}{w13}\PY{o}{+}\PY{n}{x2}\PY{o}{*}\PY{n}{w23}\PY{o}{+}\PY{n}{x6}\PY{o}{*}\PY{n}{w63}\PY{p}{)}
+        \PY{n}{x4} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{x1}\PY{o}{*}\PY{n}{w14}\PY{o}{+}\PY{n}{x2}\PY{o}{*}\PY{n}{w24}\PY{o}{+}\PY{n}{x6}\PY{o}{*}\PY{n}{w64}\PY{p}{)}
+        \PY{n}{x5} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{x3}\PY{o}{*}\PY{n}{w35}\PY{o}{+}\PY{n}{x4}\PY{o}{*}\PY{n}{w45}\PY{o}{+}\PY{n}{x7}\PY{o}{*}\PY{n}{w75}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=== FORWARD PASS 2 ===}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Output =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+=== FORWARD PASS 1 ===
+Output = 0.5597295991095776
+=== BACKWARD PASS ===
+w13 = 0.34263517938221466
+w14 = -0.5307040317301952
+w23 = 0.8106587948455537
+w24 = 0.1923239920674512
+w63 = 0.2532939742277684
+w64 = -0.438380039662744
+w35 = -0.8541467506279605
+w45 = 0.2745727217772572
+w75 = 0.10637455535192786
+=== FORWARD PASS 2 ===
+Output = 0.4064460781818811
+
+    \end{Verbatim}
+
+    Part 2: Neural Network Implementation
+
+Please read all source files carefully and understand the data
+structures and all functions. You are to complete the missing code.
+First you should define the neural network (using the NeuralNetwork
+class, see in the NeuralNetwork.py file) and reinitialise weights. Then
+you will need to complete the feedforward() and the backpropagate()
+functions.
+
+Question 1.2.1: Implement the feedforward() function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{class} \PY{n+nc}{NeuralNetwork}\PY{p}{(}\PY{n}{NeuralNetwork}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{feedforward}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}input} \PY{o}{=} \PY{n}{inputs}
+                \PY{c+c1}{\PYZsh{} Append the bias to the input vector}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}input}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}layer\PYZus{}size}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}input} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}input}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Compute the outputs of the hidden layer}
+                \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}layer\PYZus{}size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} \PYZhy{}1 Loop on the hidden layer}
+                    \PY{n}{sum\PYZus{}activation} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}layer\PYZus{}size}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Loop on the input layer}
+                        \PY{n}{sum\PYZus{}activation} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}input}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{u\PYZus{}hidden}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{sum\PYZus{}activation}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}hidden}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transfer\PYZus{}f}\PY{p}{(}\PY{n}{sum\PYZus{}activation}\PY{p}{)} \PY{c+c1}{\PYZsh{} Upload the output of the neurons k in the hidden layer}
+                
+                \PY{c+c1}{\PYZsh{} Append the bias again}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}hidden}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}layer\PYZus{}size}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}hidden} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}hidden}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}hidden}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Compute the outputs of the output layer}
+                \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}layer\PYZus{}size}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Loop on the ouput layer}
+                    \PY{n}{sum\PYZus{}activation} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}layer\PYZus{}size}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Loop on the hidden layer}
+                        \PY{n}{sum\PYZus{}activation} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W\PYZus{}hidden\PYZus{}to\PYZus{}output}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}hidden}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{u\PYZus{}output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{sum\PYZus{}activation}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transfer\PYZus{}f}\PY{p}{(}\PY{n}{sum\PYZus{}activation}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Upload the output of the neurons k in the output layer}
+\end{Verbatim}
+
+
+    Question 1.2.2: Test your implementation: create the Neural Network
+defined in Part 1 and see if the feedforward() function you implemented
+gives the same results as the ones you found by hand.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} First define your neural network}
+        \PY{n}{model} \PY{o}{=} \PY{n}{NeuralNetwork}\PY{p}{(}\PY{n}{input\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} 
+                              \PY{n}{hidden\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} 
+                              \PY{n}{output\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} 
+                              \PY{n}{transfer\PYZus{}f}\PY{o}{=}\PY{n}{sigmoid}\PY{p}{,} 
+                              \PY{n}{transfer\PYZus{}df}\PY{o}{=}\PY{n}{dsigmoid}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Then initialize the weights according to Figure 2}
+        \PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{3}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{2}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        \PY{n}{W\PYZus{}hidden\PYZus{}to\PYZus{}output} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{weights\PYZus{}init}\PY{p}{(}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden}\PY{p}{,} \PY{n}{W\PYZus{}hidden\PYZus{}to\PYZus{}output}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Feed test values}
+        \PY{n}{test} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{]}
+        \PY{n}{model}\PY{o}{.}\PY{n}{feedforward}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Print the output}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Output =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{o\PYZus{}output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Output = 0.5597295991095776
+
+    \end{Verbatim}
+
+    It matches with the result we got with the manual computation.
+
+    Question 1.2.3: Implement the backpropagate() function.
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class} \NormalTok{NeuralNetwork(NeuralNetwork):}
+    \KeywordTok{def} \NormalTok{backpropagate(}\OtherTok{self}\NormalTok{, targets, learning_rate=}\FloatTok{5.0}\NormalTok{):}
+        \NormalTok{rms_error = }\DecValTok{0}
+        
+        \CommentTok{# Compute the error and dE_du at the output layer}
+        \KeywordTok{for} \NormalTok{i in }\DataTypeTok{range}\NormalTok{(}\OtherTok{self}\NormalTok{.output_layer_size):}
+            \NormalTok{error = }\OtherTok{self}\NormalTok{.o_output[}\DecValTok{0}\NormalTok{][i] - targets[i]}
+            \NormalTok{rms_error += error**}\DecValTok{2} \CommentTok{# Root mean square error}
+            \OtherTok{self}\NormalTok{.dE_du_hidden[i] = }\DecValTok{2} \NormalTok{* error * }\OtherTok{self}\NormalTok{.transfer_df(}\OtherTok{self}\NormalTok{.u_output[i])}
+        \OtherTok{self}\NormalTok{.dE_du_hidden = np.delete(}\OtherTok{self}\NormalTok{.dE_du_hidden, -}\DecValTok{1}\NormalTok{, axis=}\DecValTok{1}\NormalTok{)}
+        
+        \CommentTok{# Compute the weighted sum of delta}
+        \KeywordTok{for} \NormalTok{i in }\DataTypeTok{range}\NormalTok{(}\OtherTok{self}\NormalTok{.hidden_layer_size}\DecValTok{-1}\NormalTok{):}
+            \NormalTok{weighted_sum = }\DecValTok{0}
+            \KeywordTok{for} \NormalTok{j in }\DataTypeTok{range}\NormalTok{(}\OtherTok{self}\NormalTok{.hidden_layer_size}\DecValTok{-1}\NormalTok{):}
+                \NormalTok{weighted_sum += }\OtherTok{self}\NormalTok{.W_hidden_to_output[j][i]*}\OtherTok{self}\NormalTok{.dE_du_hidden[j]}
+            \OtherTok{self}\NormalTok{.dE_du_output[i] = weighted_sum * }\OtherTok{self}\NormalTok{.transfer_df(}\OtherTok{self}\NormalTok{.u_hidden[i])}
+            \OtherTok{self}\NormalTok{.dE_du_output = np.delete(}\OtherTok{self}\NormalTok{.dE_du_output, -}\DecValTok{1}\NormalTok{, axis=}\DecValTok{1}\NormalTok{)}
+        
+        \CommentTok{# Compute error's derivatives w.r.t. the weights}
+        \OtherTok{self}\NormalTok{.dE_dw_hidden = (}\DecValTok{2}\NormalTok{/}\DataTypeTok{len}\NormalTok{(targets)) * np.dot(}\OtherTok{self}\NormalTok{.dE_du_hidden.T, }\OtherTok{self}\NormalTok{.o_hidden).T}
+        \OtherTok{self}\NormalTok{.dE_dw_output = (}\DecValTok{2}\NormalTok{/}\DataTypeTok{len}\NormalTok{(targets)) * np.dot(}\OtherTok{self}\NormalTok{.dE_du_output.T, }\OtherTok{self}\NormalTok{.o_input).T}
+        
+        \CommentTok{# Update weights}
+        \OtherTok{self}\NormalTok{.W_hidden_to_output -= learning_rate * }\OtherTok{self}\NormalTok{.dE_dw_hidden}
+        \OtherTok{self}\NormalTok{.W_input_to_hidden -= learning_rate * }\OtherTok{self}\NormalTok{.dE_dw_output}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{k}{class} \PY{n+nc}{NeuralNetwork}\PY{p}{(}\PY{n}{NeuralNetwork}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{backpropagate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{targets}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{5.0}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Compute the error and dE\PYZus{}du at the output layer}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}du\PYZus{}output}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}output} \PY{o}{\PYZhy{}} \PY{n}{targets}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transfer\PYZus{}df}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{u\PYZus{}output}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Compute the error and dE\PYZus{}du at the hidden layer}
+                 \PY{c+c1}{\PYZsh{}self.dE\PYZus{}du\PYZus{}output = np.multiply(self.dE\PYZus{}du\PYZus{}hidden.dot(self.W\PYZus{}hidden\PYZus{}to\PYZus{}output.T), self.o\PYZus{}hidden*(1\PYZhy{}self.o\PYZus{}hidden))}
+                 \PY{c+c1}{\PYZsh{}rint(self.dE\PYZus{}du\PYZus{}output)}
+                 \PY{c+c1}{\PYZsh{}print(self.W\PYZus{}hidden\PYZus{}to\PYZus{}output)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}du\PYZus{}hidden} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}
+                     \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W\PYZus{}hidden\PYZus{}to\PYZus{}output}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}du\PYZus{}output}\PY{p}{)}\PY{p}{,}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{transfer\PYZus{}df}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{u\PYZus{}hidden}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}du\PYZus{}hidden}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}self.dE\PYZus{}du\PYZus{}hidden = np.delete(self.dE\PYZus{}du\PYZus{}hidden, \PYZhy{}1, axis=1)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}du\PYZus{}hidden}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}print(self.dE\PYZus{}du\PYZus{}output)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}input}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Compute error\PYZsq{}s derivatives w.r.t. the weights}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}dw\PYZus{}hidden} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}du\PYZus{}hidden}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}input}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}dw\PYZus{}output} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}du\PYZus{}output}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{o\PYZus{}hidden}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+                 \PY{c+c1}{\PYZsh{}print(self.dE\PYZus{}dw\PYZus{}output)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}dw\PYZus{}hidden}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Update the weight matrices}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W\PYZus{}hidden\PYZus{}to\PYZus{}output} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{learning\PYZus{}rate} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}dw\PYZus{}output}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{learning\PYZus{}rate} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dE\PYZus{}dw\PYZus{}hidden}
+\end{Verbatim}
+
+
+    \section{initialize arrays for
+activations}\label{initialize-arrays-for-activations}
+
+u\_hidden = np.zeros((1, 1)) u\_output = np.zeros((1, 2))
+
+\section{initialize arrays for
+outputs}\label{initialize-arrays-for-outputs}
+
+o\_input = np.ones((1, 1)) o\_hidden = np.ones((1, 2)) o\_output =
+np.ones((1, 2)) W\_input\_to\_hidden =
+np.array({[}{[}.3,-.5{]},{[}.8,.2{]},{[}.2,-.4{]}{]})
+W\_hidden\_to\_output = np.array({[}{[}-.6{]},{[}.4{]},{[}.5{]}{]})
+print(np.sum({[}0.3, 1.6{]} * W\_hidden\_to\_output))
+print(dsigmoid(u\_hidden))
+
+    Question 1.2.4: Test your implementation: create the Neural Network
+defined in Part 1 and see if the backpropagate() function you
+implemented gives the same weight updates as the ones you found by hand.
+Do another forward pass and see if the new output is the same as the one
+you obtained in Question 1.1.1.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{c+c1}{\PYZsh{} First define your neural network}
+         \PY{n}{model} \PY{o}{=} \PY{n}{NeuralNetwork}\PY{p}{(}\PY{n}{input\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} 
+                               \PY{n}{hidden\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} 
+                               \PY{n}{output\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} 
+                               \PY{n}{transfer\PYZus{}f}\PY{o}{=}\PY{n}{sigmoid}\PY{p}{,} 
+                               \PY{n}{transfer\PYZus{}df}\PY{o}{=}\PY{n}{dsigmoid}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Then initialize the weights according to Figure 2}
+         \PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{3}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{2}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{W\PYZus{}hidden\PYZus{}to\PYZus{}output} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{weights\PYZus{}init}\PY{p}{(}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden}\PY{p}{,} \PY{n}{W\PYZus{}hidden\PYZus{}to\PYZus{}output}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Feed test values}
+         \PY{n}{test} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{]}
+         \PY{n}{model}\PY{o}{.}\PY{n}{feedforward}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Backpropagate}
+         \PY{n}{targets} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.4}\PY{p}{]}\PY{p}{]}
+         \PY{n}{model}\PY{o}{.}\PY{n}{backpropagate}\PY{p}{(}\PY{n}{targets}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print weights}
+         \PY{c+c1}{\PYZsh{}print(\PYZdq{}W\PYZus{}input\PYZus{}to\PYZus{}hidden =\PYZdq{}, model.W\PYZus{}input\PYZus{}to\PYZus{}hidden)}
+         \PY{c+c1}{\PYZsh{}print(\PYZdq{}W\PYZus{}hidden\PYZus{}to\PYZus{}output =\PYZdq{}, model.W\PYZus{}hidden\PYZus{}to\PYZus{}output)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w13 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w14 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w23 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w24 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w63 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w64 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{W\PYZus{}input\PYZus{}to\PYZus{}hidden}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w35 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{W\PYZus{}hidden\PYZus{}to\PYZus{}output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w45 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{W\PYZus{}hidden\PYZus{}to\PYZus{}output}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w75 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{W\PYZus{}hidden\PYZus{}to\PYZus{}output}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Feed test values again}
+         \PY{n}{model}\PY{o}{.}\PY{n}{feedforward}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print the output}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Output =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{o\PYZus{}output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ValueError                                Traceback (most recent call last)
+
+        <ipython-input-91-d3725bcc0ead> in <module>()
+         17 \# Backpropagate
+         18 targets = [[0.4]]
+    ---> 19 model.backpropagate(targets)
+         20 
+         21 \# Print weights
+
+
+        <ipython-input-90-6d2eac1b6058> in backpropagate(self, targets, learning\_rate)
+         10         self.dE\_du\_hidden = np.multiply(
+         11             np.dot(self.W\_hidden\_to\_output, self.dE\_du\_output),
+    ---> 12             self.transfer\_df(np.vstack((self.u\_hidden, np.array([[1.]]))))
+         13         )[:-1,:]
+         14         print(self.dE\_du\_hidden)
+
+
+        /opt/conda/lib/python3.6/site-packages/numpy/core/shape\_base.py in vstack(tup)
+        232 
+        233     """
+    --> 234     return \_nx.concatenate([atleast\_2d(\_m) for \_m in tup], 0)
+        235 
+        236 def hstack(tup):
+
+
+        ValueError: all the input array dimensions except for the concatenation axis must match exactly
+
+    \end{Verbatim}
+
+    It matches again with the result we got with the manual computation.
+
+    Checked your implementations and found that everything was fine?
+Congratulations! You can move to the next section.
+
+    \section{Section 2: Handwritten Digits
+Recognition}\label{section-2-handwritten-digits-recognition}
+
+    The MNIST dataset consists of handwritten digit images. It is split into
+a training set containing 60,000 samples and a test set containing
+10,000 samples. In this Lab Session, the official training set of 60,000
+images is divided into an actual training set of 50,000 samples a
+validation set of 10,000 samples. All digit images have been
+size-normalized and centered in a fixed size image of 28 x 28 pixels.
+Images are stored in byte form: you will use the NumPy python library to
+convert data files into NumPy arrays that you will use to train your
+Neural Networks.
+
+You will first work with a small subset of MNIST (1000 samples), then on
+a very small subset of MNIST (10 samples), and eventually run a model on
+the whole one.
+
+The MNIST dataset is available in the Data folder. To get the training,
+testing and validation data, run the load\_data() function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Just run that cell ;\PYZhy{})}
+        \PY{n}{training\PYZus{}data}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{load\PYZus{}data}\PY{p}{(}\PY{p}{)}
+        \PY{n}{small\PYZus{}training\PYZus{}data} \PY{o}{=} \PY{p}{(}\PY{n}{training\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{,} \PY{n}{training\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
+        \PY{n}{small\PYZus{}validation\PYZus{}data} \PY{o}{=} \PY{p}{(}\PY{n}{validation\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{200}\PY{p}{]}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{200}\PY{p}{]}\PY{p}{)}
+        \PY{n}{indices} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}
+        \PY{n}{vsmall\PYZus{}training\PYZus{}data} \PY{o}{=} \PY{p}{(}\PY{p}{[}\PY{n}{training\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{indices}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{training\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{indices}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loading MNIST data {\ldots}
+Done.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} And you can run that cell if you want to see what the MNIST dataset looks like}
+        \PY{n}{ROW} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{COLUMN} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{ROW} \PY{o}{*} \PY{n}{COLUMN}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} train[i][0] is i\PYZhy{}th image data with size 28x28}
+            \PY{n}{image} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{training\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{)}   
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{ROW}\PY{p}{,} \PY{n}{COLUMN}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}          
+            \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} cmap=\PYZsq{}gray\PYZsq{} is for black and white picture.}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} do not show axis value}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}   \PY{c+c1}{\PYZsh{} automatic padding between subplots}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Part 1: Build a bigger Neural Network
+
+The input layer of the neural network that you will build contains
+neurons encoding the values of the input pixels. The training data for
+the network will consist of many 28 by 28 pixel images of scanned
+handwritten digits. Thus, the input layer contains 784=28×28 units. The
+second layer of the network is a hidden layer. We set the number of
+neurons in the hidden layer to 30. The output layer contains 10 neurons.
+
+Question 2.1.1: Create the network described above using the
+NeuralNetwork class.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Define your neural network}
+        \PY{n}{mnist\PYZus{}model} \PY{o}{=} \PY{n}{NeuralNetwork}\PY{p}{(}\PY{n}{input\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{784}\PY{p}{,} 
+                              \PY{n}{hidden\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} 
+                              \PY{n}{output\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} 
+                              \PY{n}{transfer\PYZus{}f}\PY{o}{=}\PY{n}{sigmoid}\PY{p}{,} 
+                              \PY{n}{transfer\PYZus{}df}\PY{o}{=}\PY{n}{dsigmoid}\PY{p}{)}
+\end{Verbatim}
+
+
+    Question 2.1.2: Train your Neural Network on the small subset of MNIST
+(300 iterations) and print the new accuracy on test data. You will use
+small\_validation\_data for validation. Try different learning rates
+(0.1, 1.0, 10.0). You should use the train() function of the
+NeuralNetwork class to train your network, and the weights\_init()
+function to reinitialize weights between tests. Print the accuracy of
+each model on test data using the predict() function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Train NN and print accuracy on test data}
+         \PY{c+c1}{\PYZsh{} Learning rate list with learning rates equal to 0.1, 1.0 and 10}
+         \PY{n}{learning\PYZus{}rate\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Train NN and print accuracy on test data}
+         \PY{n}{n\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{300}
+         
+         \PY{n}{mnist\PYZus{}model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{training\PYZus{}data}\PY{p}{,} \PY{n}{small\PYZus{}validation\PYZus{}data}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{n}{n\PYZus{}iterations}\PY{p}{,} \PY{n}{learning\PYZus{}rate} \PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{acc} \PY{o}{=} \PY{n}{mnist\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{100}
+         \PY{n}{mnist\PYZus{}model}\PY{o}{.}\PY{n}{weights\PYZus{}init}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ValueError                                Traceback (most recent call last)
+
+        <ipython-input-11-b85b24fbfc5b> in <module>()
+          2 n\_iterations = 300
+          3 
+    ----> 4 mnist\_model.train(training\_data, small\_validation\_data, iterations=n\_iterations, learning\_rate =0.1, verbose=True)
+          5 acc = mnist\_model.predict(test\_data) / 100
+          6 mnist\_model.weights\_init()
+
+
+        /mnt/workspace/Lab1/NeuralNetwork.py in train(self, data, validation\_data, iterations, learning\_rate, verbose)
+         67         for it in range(iterations):
+         68             self.feedforward(inputs)
+    ---> 69             self.backpropagate(targets, learning\_rate=learning\_rate)
+         70             error = targets - self.o\_output
+         71             error *= error
+
+
+        <ipython-input-5-f5895756df8d> in backpropagate(self, targets, learning\_rate)
+          9 
+         10         \# Compute error's derivatives w.r.t. the weights
+    ---> 11         self.dE\_dw\_hidden = (2/len(targets)) * np.dot(self.dE\_du\_hidden.T, self.o\_hidden).T
+         12         self.dE\_dw\_output = (2/len(targets)) * np.dot(self.dE\_du\_output.T, self.o\_input).T
+         13 
+
+
+        ValueError: shapes (10,50000) and (1,31) not aligned: 50000 (dim 1) != 1 (dim 0)
+
+    \end{Verbatim}
+
+    Question 2.1.3: Do the same with 15 and 75 hidden neurons.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Define your neural network}
+        \PY{c+c1}{\PYZsh{} 15 hidden neurons }
+        \PY{n}{mnist\PYZus{}model\PYZus{}15} \PY{o}{=} \PY{n}{NeuralNetwork}\PY{p}{(}\PY{n}{input\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{784}\PY{p}{,} 
+                              \PY{n}{hidden\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} 
+                              \PY{n}{output\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} 
+                              \PY{n}{transfer\PYZus{}f}\PY{o}{=}\PY{n}{sigmoid}\PY{p}{,} 
+                              \PY{n}{transfer\PYZus{}df}\PY{o}{=}\PY{n}{dsigmoid}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Learning rate 0.1}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.1}
+        \PY{c+c1}{\PYZsh{} Learning rate 1.}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{} Learning rate 10.}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{10}
+        
+        \PY{c+c1}{\PYZsh{} 75 hidden neurons}
+        \PY{n}{mnist\PYZus{}model\PYZus{}75} \PY{o}{=} \PY{n}{NeuralNetwork}\PY{p}{(}\PY{n}{input\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{784}\PY{p}{,} 
+                              \PY{n}{hidden\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} 
+                              \PY{n}{output\PYZus{}layer\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} 
+                              \PY{n}{transfer\PYZus{}f}\PY{o}{=}\PY{n}{sigmoid}\PY{p}{,} 
+                              \PY{n}{transfer\PYZus{}df}\PY{o}{=}\PY{n}{dsigmoid}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Learning rate 0.1}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.1}
+        \PY{c+c1}{\PYZsh{} Learning rate 1.}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{} Learning rate 10.}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{10}
+\end{Verbatim}
+
+
+    Question 2.1.3: Repeat Questions 2.1.2 and 2.1.3 on the very small
+datasets. You will use small\_validation\_data for validation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Train NN and print accuracy on test data}
+        \PY{c+c1}{\PYZsh{} 30 hidden neurons}
+        \PY{c+c1}{\PYZsh{} Learning rate 0.1}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.1}
+        \PY{c+c1}{\PYZsh{} Learning rate 1.}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{} Learning rate 10.}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{10}
+        
+        \PY{c+c1}{\PYZsh{} 15 hidden neurons}
+        \PY{c+c1}{\PYZsh{} Learning rate 0.1}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.1}
+        \PY{c+c1}{\PYZsh{} Learning rate 1.}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{} Learning rate 10.}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{10}
+        
+        \PY{c+c1}{\PYZsh{} 75 hidden neurons}
+        \PY{c+c1}{\PYZsh{} Learning rate 0.1}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.1}
+        \PY{c+c1}{\PYZsh{} Learning rate 1.}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{} Learning rate 10.}
+        \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{10}
+\end{Verbatim}
+
+
+    Question 2.1.5: Explain the results you obtained at Questions 2.1.2,
+2.1.3 and 2.1.4.
+
+    Answer: ...
+
+    Question 2.1.6: Among all the numbers of hidden neurons and learning
+rates you tried in previous questions, which ones would you expect to
+achieve best performances on the whole dataset? Justify your answer.
+
+    Answer: ...
+
+    Question 2.1.7: Train a model with the number of hidden neurons and the
+learning rate you chose in Question 2.1.6 and print its accuracy on the
+test set. You will use validation\_data for validation. Training can be
+long on the whole dataset (\textasciitilde{}40 minutes): we suggest that
+you work on the optional part while waiting for the training to finish.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mnist\PYZus{}model} \PY{o}{=} 
+\end{Verbatim}
+
+
+    Part 2 (optional): Another loss function
+
+In classification problems, we usually replace the sigmoids in the
+output layer by a "softmax" function and the MSE loss by a
+"cross-entropy" loss. More formally, let $u = (u_1, ..., u_n)$ be the
+vector representing the activation of the output layer of a Neural
+Network. The output of that neural network is
+$o = (o_1, ..., o_n) = \textrm{softmax}(u)$, and
+
+$\textrm{softmax}(u) = (\frac{e^{u_1}}{\sum_{k=1}^n e^{u_k}}, ..., \frac{e^{u_n}}{\sum_{k=1}^n e^{u_k}})$.
+
+If $t = (t_1, ..., t_n)$ is a vector of non-negative targets such that
+$\sum_{k=1}^n t_k = 1$ (which is the case in classification problems,
+where one target is equal to 1 and all others are equal to 0), then the
+cross-entropy loss is defined as follows:
+
+$L_{xe}(o, t) = - \sum_{k=1}^n t_k\log(o_k)$.
+
+Question 2.2.1: Let $L_{xe}$ be the cross-entropy loss function and
+$u_i$, $i \in \lbrace 1, ..., n \rbrace$, be the activations of the
+output neurons. Let us assume that the transfer function of the output
+neurons is the softmax function. Targets are $t_1, ..., t_n$. Derive a
+formula for $\frac{\partial L_{xe}}{\partial u_i}$ (details of your
+calculations are not required).
+
+    Answer: $\frac{\partial L_{xe}}{\partial u_i} = $
+
+    Question 2.2.2: Implement a new feedforward() function and a new
+backpropagate() function adapted to the cross-entropy loss instead of
+the MSE loss.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{NeuralNetwork}\PY{p}{(}\PY{n}{NeuralNetwork}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{feedforward\PYZus{}xe}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{)}\PY{p}{:}
+                \PY{k}{pass}
+        
+            \PY{k}{def} \PY{n+nf}{backpropagate\PYZus{}xe}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{targets}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{5.0}\PY{p}{)}\PY{p}{:}
+                \PY{k}{pass}
+\end{Verbatim}
+
+
+    Question 2.2.3: Create a new Neural Network with the same architecture
+as in Question 2.1.1 and train it using the softmax cross-entropy loss.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Define your neural network}
+        \PY{n}{mnist\PYZus{}model\PYZus{}xe} \PY{o}{=} 
+        
+        \PY{c+c1}{\PYZsh{} Train NN and print accuracy on validation data}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Print accuracy on test data}
+\end{Verbatim}
+
+
+    Question 2.2.4: Compare your results with the MSE loss and with the
+cross-entropy loss.
+
+    Answer:
+
+    THE END!
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
